@@ -6,11 +6,18 @@ PORT = 2412
 SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER,PORT)
 FORMAT = 'utf-8'
-DISCONNECT_MESSAGE = "!DISCONECT"
+DISCONNECT_MESSAGE = "!DISCONNECT"
 
 server = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 server.bind(ADDR)
 OTHERS = []
+
+def SENDMSG(txt,new):
+    for PERSON in OTHERS:
+        if PERSON == new:
+            pass
+        else:
+            PERSON.send(txt.encode(FORMAT))
 
 
 def client_handle(conn, addr):
@@ -23,13 +30,12 @@ def client_handle(conn, addr):
             msg = conn.recv(msg_length).decode(FORMAT)
             if msg == DISCONNECT_MESSAGE:
                 connected = False
-            print(f'[{addr}] {msg}')
+                OTHERS.remove(conn)
 
-            for PERSON in OTHERS:
-                if PERSON == conn:
-                    pass
-                else:
-                    PERSON.send(f'[NEW MESSAGE]     {addr[0]}\n{msg}'.encode(FORMAT))
+            print(f'[{addr}] {msg}')
+            SENDMSG(f'___________________________________________\n'
+            f'[NEW MESSAGE]New message from {addr[0]} :\n{msg}\n'
+            f'\n___________________________________________\n',conn)
 
     conn.close()
 
@@ -41,6 +47,9 @@ def start():
         thread = threading.Thread(target=client_handle, args=(conn, addr))
         thread.start()
         OTHERS.append(conn)
+        SENDMSG(f'___________________________________________\n'
+                f'[NEW CONNECTION]{addr[0]} connected'
+                f'\n___________________________________________\n', conn)
         print(f'\n[ACTIVE CONNECTIONS] {threading.activeCount() - 1}')
 
 print('[STARTING] server is starting....')
