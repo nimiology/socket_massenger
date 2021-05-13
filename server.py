@@ -2,7 +2,7 @@ import socket
 import threading
 
 HEADER = 64
-PORT = 241
+PORT = 2412
 SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER,PORT)
 FORMAT = 'utf-8'
@@ -27,9 +27,9 @@ def client_handle(conn, addr):
 
             for PERSON in OTHERS:
                 if PERSON == conn:
-                    PERSON.send(f'[{addr}]   {msg}'.encode(FORMAT))
+                    pass
                 else:
-                    PERSON.send(f'[{addr}]   {msg}'.encode(FORMAT))
+                    PERSON.send(f'[NEW MESSAGE]     {addr[0]}\n{msg}'.encode(FORMAT))
 
     conn.close()
 

@@ -2,9 +2,11 @@ import socket
 import os
 import threading
 
+
+
+SERVER = input('What is the server IP?')
+PORT = int(input('What is the server PORT?'))
 HEADER = 64
-PORT = 241
-SERVER = '192.168.43.128'
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONECT"
 ADDR = (SERVER,PORT)
