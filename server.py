@@ -1,7 +1,7 @@
 import socket
 import threading
 
-HEADER = 64
+
 PORT = 2412
 SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER,PORT)
@@ -24,7 +24,7 @@ def client_handle(conn, addr):
     print(f'[NEW CONNECTION] {addr} conneted')
     connected = True
     while connected:
-        msg_length = conn.recv(HEADER).decode(FORMAT)
+        msg_length = conn.recv(2048).decode(FORMAT)
         if msg_length:
             msg_length = int(msg_length)
             msg = conn.recv(msg_length).decode(FORMAT)
