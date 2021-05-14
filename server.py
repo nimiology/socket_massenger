@@ -33,9 +33,10 @@ def client_handle(conn, addr):
                 OTHERS.remove(conn)
 
             print(f'[{addr}] {msg}')
-            SENDMSG(f'___________________________________________\n'
-            f'[NEW MESSAGE]New message from {addr[0]} :\n{msg}\n'
-            f'\n___________________________________________\n',conn)
+            SENDMSG(
+                f'___________________________________________\n'
+                f'[NEW MESSAGE]New message from {addr[0]} :\n{msg}\n'
+                f'___________________________________________\n',conn)
 
     conn.close()
 
