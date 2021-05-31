@@ -1,15 +1,53 @@
 import socket
 import os
 import threading
+import tkinter
+
+def HOST():
+    HOSTADDR = []
+    DIALOG = tkinter.Tk()
+    DIALOG.geometry('455x70')
+    LABEL = tkinter.Label(DIALOG,text='What is the server IP?')
+    INPUT1 = tkinter.Entry(DIALOG,width=40)
+    BUTTON = tkinter.Button(DIALOG,text='Submit',width=7,height=1)
+    LABEL.place(x=5,y=5)
+    INPUT1.place(x=5,y=25)
+    BUTTON.place(x=380,y=29)
+
+    def BIND(event):
+        TXT = INPUT1.get()
+        HOSTADDR.append(TXT)
+        DIALOG2 = tkinter.Tk()
+        DIALOG2.geometry('455x70')
+        LABEL = tkinter.Label(DIALOG2,text='What is the server PORT?')
+        INPUT = tkinter.Entry(DIALOG2,width=40)
+        BUTTON = tkinter.Button(DIALOG2,text='Submit',width=7,height=1)
+        LABEL.place(x=5,y=5)
+        INPUT.place(x=5,y=25)
+        BUTTON.place(x=380,y=29)
+
+        def PORT(event):
+            TXT = int(INPUT.get())
+            HOSTADDR.append(TXT)
+            DIALOG2.quit()
+            DIALOG2.destroy()
+
+        BUTTON.bind('<ButtonRelease-1>',PORT)
+        DIALOG2.mainloop()
+        DIALOG.quit()
+        DIALOG.destroy()
+    
+    
+    BUTTON.bind('<ButtonRelease-1>',BIND)
+    DIALOG.mainloop()
+
+    return (HOSTADDR[0],HOSTADDR[1])
 
 
+ADDR = HOST()
 WORKING = True
-SERVER = input('What is the server IP?')
-PORT = int(input('What is the server PORT?'))
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
-ADDR = (SERVER,PORT)
-
 client = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 client.connect(ADDR)
 print('[CONNECTION] connected successfully')
@@ -21,10 +59,6 @@ def send(msg):
     send_length += b' '*(2048 - len(send_length))
     client.send(send_length)
     client.send(message)
-
-
-
-
 
 def RECIVER():
     while WORKING:

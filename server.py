@@ -4,12 +4,12 @@ import threading
 
 PORT = 2412
 SERVER = socket.gethostbyname(socket.gethostname())
-ADDR = (SERVER,PORT)
+LOCALHOST = (SERVER,PORT)
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
 
 server = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-server.bind(ADDR)
+server.bind(LOCALHOST)
 OTHERS = []
 
 def SENDMSG(txt,new):
