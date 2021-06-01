@@ -51,7 +51,7 @@ def start():
         SENDMSG(f'___________________________________________\n'
                 f'[NEW CONNECTION]{addr[0]} connected'
                 f'\n___________________________________________\n', conn)
-        print(f'\n[ACTIVE CONNECTIONS] {threading.activeCount() - 1}')
+        print(f'[ACTIVE CONNECTIONS] {threading.activeCount() - 1}')
 
 print('[STARTING] server is starting....')
 start()

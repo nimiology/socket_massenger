@@ -68,6 +68,16 @@ def RECIVER():
 print(f"if you want to exit type : {DISCONNECT_MESSAGE}")
 THREAD = threading.Thread(target=RECIVER)
 THREAD.start()
+
+def UI():
+    WINDOW = tkinter.Tk()
+    WINDOW.geometry('800x600')
+    INPUT = tkinter.Entry(WINDOW,width=60)
+    INPUT.place(x=10,y=550)
+
+    WINDOW.mainloop()
+
+UI()
 while WORKING:
     MSG = input()
     send(MSG)
