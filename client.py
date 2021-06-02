@@ -73,16 +73,22 @@ def UI():
     WINDOW = tkinter.Tk()
     WINDOW.geometry('900x600')
     INPUT = tkinter.Entry(WINDOW,width=60)
-    TEXTUSERS = tkinter.Text(WINDOW,width=28,height=37)
-    TEXTUSERS.insert(tkinter.END,"There's No user in server")
+    TEXTUSERS = tkinter.Text(WINDOW,width=28,height=37,bg='Black',fg='white')
+    TEXTUSERS.insert(tkinter.END,"There's No user in server",)
     BUTTON = tkinter.Button(WINDOW,text='SEND!',width=10)
+    TEXTMESSAGES = tkinter.Text(WINDOW,width=91,height=34,bg='Black',fg='white')
+    TEXTMESSAGES.insert(tkinter.END,"MSG")
 
+
+    TEXTMESSAGES.place(x=10,y=10)
     BUTTON.place(x=570,y=553)
     TEXTUSERS.place(x=670,y=10)
     INPUT.place(x=10,y=550)
 
     WINDOW.mainloop()
 
+
+    
 UI()
 while WORKING:
     MSG = input()
