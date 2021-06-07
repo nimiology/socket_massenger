@@ -4,12 +4,12 @@ import threading
 
 PORT = 2412
 SERVER = socket.gethostbyname(socket.gethostname())
-LOCALHOST = (SERVER,PORT)
+ADDR = (SERVER,PORT)
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
 
 server = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-server.bind(LOCALHOST)
+server.bind(ADDR)
 OTHERS = []
 
 def SENDMSG(txt,new):
@@ -51,7 +51,7 @@ def start():
         SENDMSG(f'___________________________________________\n'
                 f'[NEW CONNECTION]{addr[0]} connected'
                 f'\n___________________________________________\n', conn)
-        print(f'[ACTIVE CONNECTIONS] {threading.activeCount() - 1}')
+        print(f'\n[ACTIVE CONNECTIONS] {threading.activeCount() - 1}')
 
 print('[STARTING] server is starting....')
 start()
